@@ -11,4 +11,12 @@ class Phone extends Model
         'model',
         'company'
     ];
+
+    /**
+     * Get the user that owns the phone.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

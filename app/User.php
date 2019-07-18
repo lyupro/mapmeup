@@ -12,4 +12,20 @@ class User extends Model
         'phone_id',
         'location_id'
     ];
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function phone()
+    {
+        return $this->hasOne('App\Phone');
+    }
+
+    /**
+     * Get the location associated with the user.
+     */
+    public function location()
+    {
+        return $this->hasMany('App\Location');
+    }
 }
