@@ -16,6 +16,7 @@ class CreateUserTypesTable extends Migration
         Schema::create('user_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_type');
+            $table->boolean('global');
             $table->timestamps();
         });
     }

@@ -22,4 +22,12 @@ class Location extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Get the phone that was at the location.
+     */
+    public function phone()
+    {
+        return $this->hasOneThrough('App\Phone','App\User');
+    }
 }
