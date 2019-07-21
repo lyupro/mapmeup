@@ -14,4 +14,12 @@ class Location extends Model
         'longitude',
         'type'
     ];
+
+    /**
+     * Get the user that was at the location.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -19,4 +19,21 @@ class Phone extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Get the groups that belong to the phone.
+     */
+    public function groups()
+    {
+        return $this->hasManyThrough('App\Group','App\User');
+    }
+
+    /**
+     * Get the phone locations that belong to the user
+     *
+     */
+    public function locations()
+    {
+        return $this->hasManyThrough('App\Location','App\User');
+    }
 }

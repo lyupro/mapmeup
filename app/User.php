@@ -16,15 +16,23 @@ class User extends Model
     /**
      * Get the phone associated with the user.
      */
-    public function phone()
+    public function phones()
     {
-        return $this->hasOne('App\Phone');
+        return $this->hasMany('App\Phone');
+    }
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function groups()
+    {
+        return $this->belongsToMany('App\Group', 'users_in_groups');
     }
 
     /**
      * Get the location associated with the user.
      */
-    public function location()
+    public function locations()
     {
         return $this->hasMany('App\Location');
     }

@@ -19,6 +19,7 @@ class CreatePhonesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->boolean('primary');
             $table->string('number');
             $table->string('model');
             $table->string('company');

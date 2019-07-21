@@ -18,12 +18,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('lastname');
 
-            $table->unsignedInteger('phone_id');
-            $table->foreign('phone_id')->references('id')->on('phones');
-
-            $table->unsignedInteger('location_id');
-            $table->string('location_id')->references('id')->on('locations');
-
             $table->timestampsTz();
         });
     }
