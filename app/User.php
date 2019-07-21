@@ -9,8 +9,6 @@ class User extends Model
     protected $fillable = [
         'name',
         'lastname',
-        'phone_id',
-        'location_id'
     ];
 
     /**
