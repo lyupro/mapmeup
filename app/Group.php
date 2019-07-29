@@ -17,7 +17,7 @@ class Group extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany(User::class, 'users_in_groups', 'group_id', 'user_id');
     }
 
     /**
@@ -25,6 +25,6 @@ class Group extends Model
      */
     public function owner()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }

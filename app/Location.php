@@ -20,7 +20,7 @@ class Location extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -28,6 +28,6 @@ class Location extends Model
      */
     public function phone()
     {
-        return $this->hasOneThrough('App\Phone','App\User');
+        return $this->hasOneThrough(Phone::class,User::class);
     }
 }

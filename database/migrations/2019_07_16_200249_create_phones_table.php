@@ -11,18 +11,27 @@ class CreatePhonesTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('phones', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
 
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
-            $table->boolean('primary');
             $table->string('number');
+            $table->boolean('primary');
             $table->string('model');
             $table->string('company');
+            $table->string('os');
+            $table->string('os_version');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

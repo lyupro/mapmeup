@@ -15,8 +15,10 @@ class CreateUserTypesTable extends Migration
     {
         Schema::create('user_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_type');
-            $table->boolean('global');
+            $table->enum('user_type',['User', 'Moderator', 'Admin', 'Developer'])->default('User');
+            $table->boolean('global')->default(false);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

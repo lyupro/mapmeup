@@ -17,7 +17,11 @@ class CreateLocationsTable extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->string('name');
             $table->string('address');
@@ -25,6 +29,7 @@ class CreateLocationsTable extends Migration
             $table->string('longitude');
             $table->string('type');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

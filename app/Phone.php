@@ -8,10 +8,12 @@ class Phone extends Model
 {
     protected $fillable = [
         'user_id',
-        'primary',
         'number',
+        'primary',
         'model',
-        'company'
+        'company',
+        'os',
+        'os_version'
     ];
 
     /**
@@ -19,7 +21,7 @@ class Phone extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -27,7 +29,7 @@ class Phone extends Model
      */
     public function groups()
     {
-        return $this->hasManyThrough('App\Group','App\User');
+        return $this->hasManyThrough(Group::class,User::class);
     }
 
     /**
@@ -36,6 +38,6 @@ class Phone extends Model
      */
     public function locations()
     {
-        return $this->hasManyThrough('App\Location','App\User');
+        return $this->hasManyThrough(Location::class,User::class);
     }
 }
