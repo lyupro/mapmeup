@@ -72,38 +72,19 @@
                 <th>Name:</th>
                 <th>Last Name:</th>
                 <th>Phones:</th>
-                <th>Registred At:</th>
-                <th>Actions:</th>
             </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
-                    <tr>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->lastname}}</td>
-                        <td>
-                            @foreach($user->phones as $phone)
-                                {{$phone->number}}
-                            @endforeach
-                        </td>
-                        <td>{{$user->created_at}}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="{{ route('users.show',$user->id)}}" title=""
-                                   class="btn btn-primary">Show</a>
-                                <a href="{{ route('users.edit',$user->id)}}" title=""
-                                       class="btn btn-primary">
-                                    <i class="fa fa-pencil"></i>Edit</a>
-{{--                                <a href="users/{{$user->id}}/delete" title=""--}}
-                                <form action="{{ route('users.destroy', $user->id)}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">Delete</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->lastname}}</td>
+                    <td>
+                        @foreach($user->phones as $phone)
+                            {!!$phone->getFullData()!!}
+                        @endforeach
+                    </td>
+                    <td>{{$user->created_at}}</td>
+                </tr>
             </tbody>
         </table>
     </div>

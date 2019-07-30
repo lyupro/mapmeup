@@ -39,7 +39,7 @@ class UsersController extends Controller
         $user = new User;
         $user->fill($request->all());
         $user->save();
-        return $user->name;
+        return redirect('/users')->with('success', 'User has been added');
     }
 
     /**
@@ -50,7 +50,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.user', ['user'=>$user]);
     }
 
     /**
@@ -59,9 +60,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $user = User::find($request->id);
+        $user = User::find($id);
         return view('users.edit', ['user'=>$user]);
     }
 
@@ -72,18 +73,22 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUser $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->fill($request->all());
+        $user->save();
+        return redirect('/users')->with('success', 'User has been updated');
     }
 
     /**
      * @param User $id
      */
-    public function destroy(User $id)
+    public function destroy($id)
     {
-        $user=User::find($id);
+        $user = User::find($id);
         $user->delete();
-        return redirect()->back();
+        //return redirect()->back();
+        return redirect('/users')->with('success', 'User has been deleted Successfully');
     }
 }

@@ -30,6 +30,10 @@
                     <label for="price">Last Name:</label>
                     <input type="text" class="form-control" name="lastname"/>
                 </div>
+                <div class="form-group">
+                    <label for="price">Phone:</label>
+                    <input type="text" class="form-control" name="phone"/>
+                </div>
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>
         </div>

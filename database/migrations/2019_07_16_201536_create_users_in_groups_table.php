@@ -39,7 +39,6 @@ class CreateUsersInGroupsTable extends Migration
 
             $table->unique(['user_id', 'group_id']);
 
-            $table->softDeletes();
             $table->timestamps();
         });
     }

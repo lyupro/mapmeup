@@ -18,7 +18,6 @@ class CreateUserTypesTable extends Migration
             $table->enum('user_type',['User', 'Moderator', 'Admin', 'Developer'])->default('User');
             $table->boolean('global')->default(false);
 
-            $table->softDeletes();
             $table->timestamps();
         });
     }

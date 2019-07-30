@@ -4,9 +4,15 @@ namespace App;
 
 use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * @var array
+     */
     protected $fillable = [
         'name',
         'lastname'
@@ -82,10 +88,5 @@ class User extends Model
     public function locations()
     {
         return $this->hasMany(Location::class);
-    }
-
-    public function delete()
-    {
-        $this->delete();
     }
 }

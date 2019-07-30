@@ -20,7 +20,8 @@
                     </ul>
                 </div><br />
             @endif
-            <form method="put" action="users/{{$user->id}}">
+            <form method="post" action="{{ route('users.update', $user->id) }}">
+                <input name="_method" type="hidden" value="PUT">
                 <div class="form-group">
                     @csrf
                     <label for="name">Name:</label>
@@ -30,10 +31,13 @@
                     <label for="price">Last Name:</label>
                     <input type="text" class="form-control" name="lastname" value="{{$user->lastname}}" required/>
                 </div>
+                <h2>Phones</h2>
+                @foreach($user->phones as $phone)
                 <div class="form-group">
                     <label for="price">Phone:</label>
-                    <input type="text" class="form-control" name="phone" value="{{$user->phone}}" required/>
+                    <input type="text" class="form-control" name="phones[]" value="{{$phone->number}}" required/>
                 </div>
+                @endforeach
                 <button type="submit" class="btn btn-primary">Edit</button>
             </form>
         </div>

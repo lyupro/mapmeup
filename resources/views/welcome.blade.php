@@ -64,13 +64,7 @@
     </style>
 </head>
 <body>
-@foreach($users as $user)
-    {{$user->name}}
-    {{$user->lastname}}
-    @foreach($user->phones as $phone)
-        {{$phone->number}}
-    @endforeach
-@endforeach
+
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">

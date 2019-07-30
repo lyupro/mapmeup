@@ -25,7 +25,7 @@ class StoreUser extends FormRequest
     {
         return [
             'name' => 'required|string|max:25',
-            'lastname' => 'required|string|max:25',
+            'lastname' => 'required|string|max:25'
         ];
     }
 }

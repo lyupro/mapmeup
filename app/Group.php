@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * @var array
+     */
     protected $fillable = [
         'name',
         'description',
