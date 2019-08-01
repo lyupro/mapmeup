@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUser;
-use App\User;
+use App\Phone;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class PhonesController extends Controller
 {
+
+    // TODO Make 'PhoneTypes' table with currently phones
+    // TODO and ADD method which will be add new Companies & Phone Models there
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.models', ['models'=>User::all()]);
+        return view('phones.models', ['models'=>Phone::all()]);
     }
 
     /**
@@ -25,7 +27,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $data = [
+          'phones' => Phone::all()
+        ];
     }
 
     /**
@@ -34,12 +38,9 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUser $request)
+    public function store(Request $request)
     {
-        $model = new User;
-        $model->fill($request->all());
-        $model->save();
-        return redirect('/users')->with('success', 'User has been added');
+        //
     }
 
     /**
@@ -50,8 +51,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $model = User::find($id);
-        return view('users.model', ['model'=>$model]);
+        //
     }
 
     /**
@@ -62,8 +62,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $model = User::find($id);
-        return view('users.edit', ['model'=>$model]);
+        //
     }
 
     /**
@@ -73,22 +72,19 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUser $request, $id)
+    public function update(Request $request, $id)
     {
-        $model = User::find($id);
-        $model->fill($request->all());
-        $model->save();
-        return redirect('/users')->with('success', 'User has been updated');
+        //
     }
 
     /**
-     * @param User $id
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $model = User::find($id);
-        $model->delete();
-        //return redirect()->back();
-        return redirect('/users')->with('success', 'User has been deleted Successfully');
+        //
     }
 }

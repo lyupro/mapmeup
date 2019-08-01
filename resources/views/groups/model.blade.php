@@ -68,22 +68,23 @@
     <div class="content">
         <table>
             <thead>
-            <tr>
-                <th>Name:</th>
-                <th>Last Name:</th>
-                <th>Phones:</th>
-            </tr>
+                <tr>
+                    <th>Group Name:</th>
+                    <th>Description:</th>
+                    <th>Owner ID:</th>
+                </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->lastname}}</td>
+                    <td>{{$model->name}}</td>
+                    <td><textarea name="" id="" cols="30" rows="10" disabled>{{$model->description}}</textarea></td>
+                    <td>{{$model->owner_id}}</td>
                     <td>
-                        @foreach($user->phones as $phone)
-                            {!!$phone->getFullData()!!}
-                        @endforeach
+                        <div class="btn-group btn-group-sm">
+                            <a href="{{ route('groups.index')}}" title="" class="btn btn-primary">
+                                Back</a><br>
+                        </div>
                     </td>
-                    <td>{{$user->created_at}}</td>
                 </tr>
             </tbody>
         </table>
@@ -91,3 +92,4 @@
 </div>
 </body>
 </html>
+

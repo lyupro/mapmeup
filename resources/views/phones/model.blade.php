@@ -64,36 +64,36 @@
     </style>
 </head>
 <body>
-
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-
     <div class="content">
-        <div class="title m-b-md">
-            MapMeUp
-        </div>
-
-        <div class="links">
-            <a href="{{ url('/users') }}">Users</a>
-            <a href="{{ url('/groups') }}">Groups</a>
-            <a href="{{ url('/phones') }}">Phones</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name:</th>
+                    <th>Last Name:</th>
+                    <th>Created At:</th>
+                    <th>Phones:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{$model->name}}</td>
+                    <td>{{$model->lastname}}</td>
+                    <td>{{$model->created_at}}</td>
+                    <td>
+                        @foreach($model->phones as $phone)
+                            {!!$phone->getFullData()!!}
+                        @endforeach
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{{ route('phones.index')}}" title="" class="btn btn-primary">
+                                Back</a><br>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

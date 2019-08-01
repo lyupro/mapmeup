@@ -20,25 +20,25 @@
                     </ul>
                 </div><br />
             @endif
-            <form method="post" action="{{ route('users.update', $model->id) }}">
-                <input name="_method" type="hidden" value="PUT">
+            <form method="post" action="{{ route('phones.store') }}">
                 <div class="form-group">
                     @csrf
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" name="name" value="{{$model->name}}" required/>
+                    <label for="price">User ID:</label>
+                    <select name="owner_id" id="">
+                        @foreach($users as $user)
+                            <option value="{{$user->id}}">{{$user->getFullNameAttribute()}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="price">Last Name:</label>
-                    <input type="text" class="form-control" name="lastname" value="{{$model->lastname}}" required/>
+                    <label for="price">Number:</label>
+                    <input type="text" class="form-control" name="lastname"/>
                 </div>
-                <h2>Phones</h2>
-                @foreach($model->phones as $phone)
                 <div class="form-group">
                     <label for="price">Phone:</label>
-                    <input type="text" class="form-control" name="phones[]" value="{{$phone->number}}" required/>
+                    <input type="text" class="form-control" name="phone"/>
                 </div>
-                @endforeach
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-primary">Add</button>
             </form>
         </div>
     </div>

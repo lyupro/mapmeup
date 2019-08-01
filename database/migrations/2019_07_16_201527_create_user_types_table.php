@@ -19,6 +19,10 @@ class CreateUserTypesTable extends Migration
             $table->boolean('global')->default(false);
 
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
+            //$table->charset = 'utf8mb4';
+            //$table->collation = 'utf8mb4_general_ci';
         });
     }
 

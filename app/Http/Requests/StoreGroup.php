@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreUser extends FormRequest
+class StoreGroup extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,6 @@ class StoreUser extends FormRequest
      */
     public function authorize()
     {
-        //return !is_null(Auth::user());
         return true;
     }
 
@@ -27,7 +26,8 @@ class StoreUser extends FormRequest
     {
         return [
             'name' => 'required|string|max:25',
-            'lastname' => 'required|string|max:25'
+            'description' => 'required|string|max:255',
+            'owner_id' => 'required|integer'
         ];
     }
 }

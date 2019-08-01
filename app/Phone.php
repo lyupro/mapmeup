@@ -31,7 +31,7 @@ class Phone extends Model
 
     public function getFullData()
     {
-        return $this->number . "<br>" . $this->model . "<br>" . $this->company . "<br>" . $this->os . "<br>" . $this->os_version . "<br>";
+        return $this->number . "<br>" . $this->model . " " . $this->company . "<br>" . $this->os . " " . $this->os_version . "<br>";
     }
 
     /**

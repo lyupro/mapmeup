@@ -69,33 +69,32 @@
         <table>
             <thead>
             <tr>
-                <th>Name:</th>
-                <th>Last Name:</th>
+                <th>User ID:</th>
                 <th>Phones:</th>
                 <th>Registred At:</th>
                 <th>Actions:</th>
             </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
+                @foreach($models as $model)
                     <tr>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->lastname}}</td>
+                        <td>{{$model->name}}</td>
+                        <td>{{$model->lastname}}</td>
                         <td>
-                            @foreach($user->phones as $phone)
+                            @foreach($model->phones as $phone)
                                 {{$phone->number}}
                             @endforeach
                         </td>
-                        <td>{{$user->created_at}}</td>
+                        <td>{{$model->created_at}}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('users.show',$user->id)}}" title=""
-                                   class="btn btn-primary">Show</a>
-                                <a href="{{ route('users.edit',$user->id)}}" title=""
+                                <a href="{{ route('users.show',$model->id)}}" title=""
+                                   class="btn btn-primary">Show</a><br>
+                                <a href="{{ route('users.edit',$model->id)}}" title=""
                                        class="btn btn-primary">
-                                    <i class="fa fa-pencil"></i>Edit</a>
-{{--                                <a href="users/{{$user->id}}/delete" title=""--}}
-                                <form action="{{ route('users.destroy', $user->id)}}" method="post">
+                                    <i class="fa fa-pencil"></i>Edit</a><br>
+{{--                                <a href="users/{{$model->id}}/delete" title=""--}}
+                                <form action="{{ route('users.destroy', $model->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -106,6 +105,10 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="links">
+            <a href="{{ url('/') }}">Home</a>
+        </div>
     </div>
 </div>
 </body>
