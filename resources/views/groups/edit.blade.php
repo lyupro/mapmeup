@@ -8,7 +8,7 @@
     </style>
     <div class="card uper">
         <div class="card-header">
-            Add New User
+            Add New Group
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -35,7 +35,9 @@
                     <label for="price">Owner ID:</label>
                     <select name="owner_id" id="">
                         @foreach($users as $user)
-                            <option value="{{$user->id}}">{{$user->getFullNameAttribute()}}</option>
+                            @if($user->id != $model->owner_id)
+                                <option value="{{$user->id}}">{{$user->getFullNameAttribute()}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

@@ -65,7 +65,15 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
+
     <div class="content">
+
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div><br>
+        @endif
+
         <table>
             <thead>
             <tr>
@@ -90,9 +98,9 @@
                         <td>
                             <div class="btn-group btn-group-sm">
                                 <a href="{{ route('users.show',$model->id)}}" title=""
-                                   class="btn btn-primary">Show</a><br>
+                                    class="btn btn-primary btn-sm" role="button">Show</a><br>
                                 <a href="{{ route('users.edit',$model->id)}}" title=""
-                                       class="btn btn-primary">
+                                    class="btn btn-primary" role="button">
                                     <i class="fa fa-pencil"></i>Edit</a><br>
 {{--                                <a href="users/{{$model->id}}/delete" title=""--}}
                                 <form action="{{ route('users.destroy', $model->id)}}" method="post">
@@ -105,7 +113,7 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table><br>
 
         <div class="links">
             <a href="{{ url('/') }}">Home</a>

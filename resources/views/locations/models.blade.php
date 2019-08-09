@@ -65,9 +65,7 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-
     <div class="content">
-
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -77,27 +75,32 @@
         <table>
             <thead>
             <tr>
-                <th>Group Name:</th>
-                <th>Description:</th>
-                <th>Owner ID:</th>
-                <th>Actions:</th>
+                <th>User ID:</th>
+                <th>Name:</th>
+                <th>Address:</th>
+                <th>Latitude:</th>
+                <th>Longitude:</th>
+                <th>Type:</th>
             </tr>
             </thead>
             <tbody>
                 @foreach($models as $model)
                     <tr>
+                        <td>{{$model->user_id}}</td>
                         <td>{{$model->name}}</td>
-                        <td><textarea name="" id="" cols="30" rows="10" disabled>{{$model->description}}</textarea></td>
-                        <td>{{$model->owner_id}}</td>
+                        <td>{{$model->address}}</td>
+                        <td>{{$model->latitude}}</td>
+                        <td>{{$model->longitude}}</td>
+                        <td>{{$model->type}}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('groups.show',$model->id)}}" title=""
+                                <a href="{{ route('locations.show',$model->id)}}" title=""
                                     class="btn btn-primary" role="button">Show</a><br>
-                                <a href="{{ route('groups.edit',$model->id)}}" title=""
+                                <a href="{{ route('locations.edit',$model->id)}}" title=""
                                     class="btn btn-primary" role="button">
                                     <i class="fa fa-pencil"></i>Edit</a><br>
-{{--                                <a href="users/{{$model->id}}/delete" title=""--}}
-                                <form action="{{ route('groups.destroy', $model->id)}}" method="post">
+{{--                                <a href="locations/{{$model->id}}/delete" title=""--}}
+                                <form action="{{ route('locations.destroy', $model->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -111,7 +114,7 @@
 
         <div class="links">
             <a href="{{ url('/') }}">Home</a>
-        </div><br>
+        </div>
     </div>
 </div>
 </body>

@@ -66,35 +66,48 @@
 <body>
 <div class="flex-center position-ref full-height">
     <div class="content">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div><br>
+        @endif
+
         <table>
             <thead>
             <tr>
                 <th>User ID:</th>
-                <th>Phones:</th>
-                <th>Registred At:</th>
-                <th>Actions:</th>
+                <th>Phone:</th>
+                <th>Primary:</th>
+                <th>Model:</th>
+                <th>Company:</th>
+                <th>OS:</th>
+                <th>OS Version:</th>
             </tr>
             </thead>
             <tbody>
                 @foreach($models as $model)
                     <tr>
-                        <td>{{$model->name}}</td>
-                        <td>{{$model->lastname}}</td>
-                        <td>
-                            @foreach($model->phones as $phone)
-                                {{$phone->number}}
-                            @endforeach
-                        </td>
-                        <td>{{$model->created_at}}</td>
+                        <td>{{$model->user_id}}</td>
+                        <td>{{$model->number}}</td>
+{{--                        <td>--}}
+{{--                            @foreach($model->phones as $phone)--}}
+{{--                                {{$phone->number}}--}}
+{{--                            @endforeach--}}
+{{--                        </td>--}}
+                        <td>{{$model->primary}}</td>
+                        <td>{{$model->model}}</td>
+                        <td>{{$model->company}}</td>
+                        <td>{{$model->os}}</td>
+                        <td>{{$model->os_version}}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('users.show',$model->id)}}" title=""
-                                   class="btn btn-primary">Show</a><br>
-                                <a href="{{ route('users.edit',$model->id)}}" title=""
-                                       class="btn btn-primary">
+                                <a href="{{ route('phones.show',$model->id)}}" title=""
+                                    class="btn btn-primary" role="button">Show</a><br>
+                                <a href="{{ route('phones.edit',$model->id)}}" title=""
+                                    class="btn btn-primary" role="button">
                                     <i class="fa fa-pencil"></i>Edit</a><br>
-{{--                                <a href="users/{{$model->id}}/delete" title=""--}}
-                                <form action="{{ route('users.destroy', $model->id)}}" method="post">
+{{--                                <a href="phones/{{$model->id}}/delete" title=""--}}
+                                <form action="{{ route('phones.destroy', $model->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -104,7 +117,7 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table><br>
 
         <div class="links">
             <a href="{{ url('/') }}">Home</a>

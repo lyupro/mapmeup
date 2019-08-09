@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUser;
+use App\Http\Requests\StoreLocation;
+use App\Location;
 use App\User;
 
-class UsersController extends Controller
+class LocationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.models', ['models'=>User::all()]);
+        $data = [
+          'models' => Location::all()
+        ];
+        return view('locations.models', $data);
     }
 
     /**
@@ -24,7 +28,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $data = [
+            'users' => User::all()
+        ];
+        return view('locations.create', $data);
     }
 
     /**
@@ -33,12 +40,12 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUser $request)
+    public function store(StoreLocation $request)
     {
-        $model = new User;
+        $model = new Location();
         $model->fill($request->all());
         $model->save();
-        return redirect('/users')->with('status', 'User has been added');
+        return redirect('/locations')->with('status', 'Location has been added');
     }
 
     /**
@@ -49,8 +56,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $model = User::find($id);
-        return view('users.model', ['model'=>$model]);
+        $model = Location::find($id);
+        return view('locations.model', ['model' => $model]);
     }
 
     /**
@@ -61,8 +68,11 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $model = User::find($id);
-        return view('users.edit', ['model'=>$model]);
+        $data = [
+            'users' => User::all(),
+            'model' => Location::find($id)
+        ];
+        return view('locations.edit', $data);
     }
 
     /**
@@ -72,22 +82,25 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUser $request, $id)
+    public function update(StoreLocation $request, $id)
     {
-        $model = User::find($id);
+        $model = Location::find($id);
         $model->fill($request->all());
         $model->save();
-        return redirect('/users')->with('status', 'User has been updated');
+        return redirect('/locations')->with('status', 'Location has been updated');
     }
 
     /**
-     * @param User $id
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $model = User::find($id);
+        $model = Location::find($id);
         $model->delete();
         //return redirect()->back();
-        return redirect('/users')->with('status', 'User has been deleted Successfully');
+        return redirect('/locations')->with('status', 'Location ' . $model->name . ' has been deleted successfully');
     }
 }

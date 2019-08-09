@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePhone;
 use App\Phone;
-use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\DB;
 
 class PhonesController extends Controller
 {
@@ -17,7 +19,10 @@ class PhonesController extends Controller
      */
     public function index()
     {
-        return view('phones.models', ['models'=>Phone::all()]);
+        $data = [
+            'models' => Phone::all()
+        ];
+        return view('phones.models', $data);
     }
 
     /**
@@ -28,8 +33,9 @@ class PhonesController extends Controller
     public function create()
     {
         $data = [
-          'phones' => Phone::all()
+            'users' => User::all()
         ];
+        return view('phones.create', $data);
     }
 
     /**
@@ -38,9 +44,22 @@ class PhonesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePhone $request)
     {
-        //
+        $model = new Phone();
+
+        $check = DB::table('phones')
+        ->where('user_id', $request->user_id)
+        ->where('primary', true)
+        ->get();
+
+        if($check->count() == true){
+            return redirect('/phones')->with('status', 'This phone ' . $request->number . ' can\'t be set as primary phone');
+        }
+
+        $model->fill($request->all());
+        $model->save();
+        return redirect('/phones')->with('status', 'Phone has been added');
     }
 
     /**
@@ -51,7 +70,8 @@ class PhonesController extends Controller
      */
     public function show($id)
     {
-        //
+        $model = Phone::find($id);
+        return view('phones.model', ['model' => $model]);
     }
 
     /**
@@ -62,7 +82,12 @@ class PhonesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+          'users' => User::all(),
+          'model' => Phone::find($id)
+        ];
+
+        return view('phones.edit', $data);
     }
 
     /**
@@ -72,9 +97,12 @@ class PhonesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePhone $request, $id)
     {
-        //
+        $model = Phone::find($id);
+        $model->fill($request->all());
+        $model->save();
+        return redirect('/phones')->with('status', 'Phone has been updated');
     }
 
     /**
@@ -85,6 +113,8 @@ class PhonesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = Phone::find($id);
+        $model->delete();
+        return redirect('/phones')->with('status', 'Phone ' . $model->number . ' has been deleted successfully');
     }
 }

@@ -8,7 +8,7 @@ class LocationsTableSeeder extends Seeder
     private $array = [
         [1, 'Love.Fish', '580 Darling Street, Rozelle, NSW', '-33.861034', '151.171936', 'restaurant'],
         [2, 'Young Henrys', '76 Wilford Street, Newtown, NSW', '-33.898113', '151.174469', 'bar'],
-        [3, 'Three Blue Ducks', '43 Macpherson Street, Bronte, NSW', '-33.906357', '151.263763', 'restaurant']
+        [2, 'Three Blue Ducks', '43 Macpherson Street, Bronte, NSW', '-33.906357', '151.263763', 'restaurant']
     ];
 
     /**
@@ -26,7 +26,9 @@ class LocationsTableSeeder extends Seeder
                     'address' => $index[2],
                     'latitude' => $index[3],
                     'longitude' => $index[4],
-                    'type' => $index[5]
+                    'type' => $index[5],
+                    'created_at' => DB::raw('now()'),
+                    'updated_at' => DB::raw('now()')
                 ]);
             }
         }

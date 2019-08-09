@@ -70,26 +70,24 @@
             <thead>
                 <tr>
                     <th>User ID:</th>
-                    <th>Phone:</th>
-                    <th>Primary:</th>
-                    <th>Model:</th>
-                    <th>Company:</th>
-                    <th>OS:</th>
-                    <th>OS Version:</th>
+                    <th>Name:</th>
+                    <th>Address:</th>
+                    <th>Latitude:</th>
+                    <th>Longitude:</th>
+                    <th>Type:</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>{{$model->user_id}}</td>
-                    <td>{{$model->number}}</td>
-                    <td>{{$model->primary}}</td>
-                    <td>{{$model->model}}</td>
-                    <td>{{$model->company}}</td>
-                    <td>{{$model->os}}</td>
-                    <td>{{$model->os_version}}</td>
+                    <td>{{$model->name}}</td>
+                    <td>{{$model->address}}</td>
+                    <td>{{$model->latitude}}</td>
+                    <td>{{$model->longitude}}</td>
+                    <td>{{$model->type}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <a href="{{ route('phones.index')}}" title="" class="btn btn-primary">
+                            <a href="{{ route('locations.index')}}" title="" class="btn btn-primary">
                                 Back</a><br>
                         </div>
                     </td>

@@ -86,13 +86,10 @@
         </div>
 
         <div class="links">
-            <a href="{{ url('/users') }}">Users</a>
-            <a href="{{ url('/groups') }}">Groups</a>
-            <a href="{{ url('/phones') }}">Phones</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
+            <a href="{{ route('users.index') }}">Users</a>
+            <a href="{{ route('groups.index') }}">Groups</a>
+            <a href="{{ route('phones.index') }}">Phones</a>
+            <a href="{{ route('locations.index') }}">Locations</a>
         </div>
     </div>
 </div>

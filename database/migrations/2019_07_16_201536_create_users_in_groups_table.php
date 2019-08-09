@@ -16,21 +16,21 @@ class CreateUsersInGroupsTable extends Migration
         Schema::create('users_in_groups', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('user_id');
+            $table->integer('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->unsignedInteger('user_type_id');
+            $table->integer('user_type_id');
             $table->foreign('user_type_id')
                 ->references('id')
                 ->on('user_types')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->unsignedInteger('group_id');
+            $table->integer('group_id');
             $table->foreign('group_id')
                 ->references('id')
                 ->on('groups')

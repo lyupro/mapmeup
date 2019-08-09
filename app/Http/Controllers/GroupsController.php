@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Http\Requests\StoreGroup;
+use App\Http\Requests\UpdateGroup;
 use App\User;
 use App\UsersInGroup;
-use Illuminate\Http\Request;
 
 class GroupsController extends Controller
 {
@@ -17,7 +17,10 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        return view('groups.models', ['models' => Group::all()]);
+        $data = [
+            'models' => Group::all()
+        ];
+        return view('groups.models', $data);
     }
 
     /**
@@ -53,7 +56,7 @@ class GroupsController extends Controller
         $usersInGroups->user_type_id = 3; // 1 = User, 2 = Moderator, 3 = Admin, 4 = Developer
         $usersInGroups->save();
 
-        return redirect('/groups')->with('success', 'Group has been added');
+        return redirect('/groups')->with('status', 'Group has been added');
     }
 
     /**
@@ -90,36 +93,26 @@ class GroupsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreGroup $request, $id)
+
+    // TODO Change UserType when user change owner_id
+    // TODO Private Function
+    public function update(UpdateGroup $request, $id)
     {
+        if( empty($request->owner_id)){
+            $request->except(['owner_id']);
+        }
+
         $model = Group::find($id);
         $model->fill($request->all());
         $model->save();
 
-        $findUserInGroup = UsersInGroup::find($model->owner_id);
+        $usersInGroups = new UsersInGroup();
+        $usersInGroups->user_id = $model->owner_id;
+        $usersInGroups->group_id = $model->id;
+        $usersInGroups->user_type_id = 3; // 1 = User, 2 = Moderator, 3 = Admin, 4 = Developer
+        $usersInGroups->save();
 
-        /*
-        if( !empty($model->owner_id) && !empty($findUserInGroup->user_id)
-            && $model->owner_id != $findUserInGroup->user_id){
-
-            $usersInGroups = new UsersInGroup();
-            $usersInGroups->user_id = $model->owner_id;
-            $usersInGroups->group_id = $model->id;
-            $usersInGroups->user_type_id = 3; // 1 = User, 2 = Moderator, 3 = Admin, 4 = Developer
-            $usersInGroups->save();
-        }
-        */
-        if($model->owner_id != $findUserInGroup->user_id){
-            $usersInGroups = new UsersInGroup();
-            $usersInGroups->user_id = $model->owner_id;
-            $usersInGroups->group_id = $model->id;
-            $usersInGroups->user_type_id = 3; // 1 = User, 2 = Moderator, 3 = Admin, 4 = Developer
-            $usersInGroups->save();
-        }
-
-        //return redirect('/groups')->with('success', 'Group '. $model->name .' has been updated');
-        dd($model, $findUserInGroup);
-        return redirect('/groups')->with('success', 'Group '. $model->name .' has been updated');
+        return redirect('/groups')->with('status', 'Group '. $model->name .' has been updated');
     }
 
     /**
@@ -133,6 +126,6 @@ class GroupsController extends Controller
         $model = Group::find($id);
         $model->delete();
         //return redirect()->back();
-        return redirect('/groups')->with('success', 'Group ' . $model->name . ' has been deleted Successfully');
+        return redirect('/groups')->with('status', 'Group ' . $model->name . ' has been deleted successfully');
     }
 }

@@ -22,7 +22,9 @@ class UsersTableSeeder extends Seeder
             foreach ($this->array as $index){
                 DB::table('users')->insert([
                     'name' => $index[0],
-                    'lastname' => $index[1]
+                    'lastname' => $index[1],
+                    'created_at' => DB::raw('now()'),
+                    'updated_at' => DB::raw('now()')
                 ]);
             }
         }

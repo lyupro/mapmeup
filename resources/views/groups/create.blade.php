@@ -13,7 +13,7 @@
     </style>
     <div class="card uper">
         <div class="card-header">
-            Add New User
+            Add New Group
         </div>
         <div class="card-body">
             @if ($errors->any())

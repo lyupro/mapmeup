@@ -8,7 +8,7 @@
     </style>
     <div class="card uper">
         <div class="card-header">
-            Add New Phone
+            Add New Location
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -20,8 +20,7 @@
                     </ul>
                 </div><br />
             @endif
-            <form method="post" action="{{ route('phones.update', $model->id) }}">
-                <input name="_method" type="hidden" value="PUT">
+            <form method="post" action="{{ route('locations.store') }}">
                 <div class="form-group">
                     @csrf
                     <label for="price">User ID:</label>
@@ -32,30 +31,26 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="name">Number:</label>
-                    <input type="text" class="form-control" name="number" value="{{$model->number}}" required/>
+                    <label for="price">Name:</label>
+                    <input type="text" class="form-control" name="name"/>
                 </div>
                 <div class="form-group">
-                    <label for="price">Primary:</label>
-                    <input type="text" class="form-control" name="primary" value="{{$model->primary}}" required/>
+                    <label for="price">Address:</label>
+                    <input type="text" class="form-control" name="address"/>
                 </div>
                 <div class="form-group">
-                    <label for="price">Model:</label>
-                    <input type="text" class="form-control" name="model" value="{{$model->model}}" required/>
+                    <label for="price">Latitude:</label>
+                    <input type="text" class="form-control" name="latitude"/>
                 </div>
                 <div class="form-group">
-                    <label for="price">Company:</label>
-                    <input type="text" class="form-control" name="company" value="{{$model->company}}" required/>
+                    <label for="price">Longitude:</label>
+                    <input type="text" class="form-control" name="longitude"/>
                 </div>
                 <div class="form-group">
-                    <label for="price">OS:</label>
-                    <input type="text" class="form-control" name="os" value="{{$model->os}}" required/>
+                    <label for="price">Type:</label>
+                    <input type="text" class="form-control" name="type"/>
                 </div>
-                <div class="form-group">
-                    <label for="price">OS Version:</label>
-                    <input type="text" class="form-control" name="os_version" value="{{$model->os_version}}" required/>
-                </div>
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-primary">Add</button>
             </form>
         </div>
     </div>
