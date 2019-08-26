@@ -2,11 +2,14 @@
 
 namespace App;
 
+
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
+    use HasApiTokens;
     use SoftDeletes;
 
     /**

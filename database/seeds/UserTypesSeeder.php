@@ -3,13 +3,14 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UsersTableSeeder extends Seeder
+class UserTypesSeeder extends Seeder
 {
 
     private $array = [
-        ["Max","Lyu"],
-        ["Alex","Shmzkh"],
-        ["М","Л"]
+        "User",
+        "Moderator",
+        "Admin",
+        "Developer"
     ];
 
     /**
@@ -20,10 +21,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         if( is_array($this->array) && count($this->array) > 0){
-            foreach ($this->array as $index){
-                DB::table('users')->insert([
-                    'name' => $index[0],
-                    'lastname' => $index[1],
+            foreach ($this->array as $index) {
+                DB::table('user_types')->insert([
+                   'user_type' => $index,
+                    'global' => false,
                     'created_at' => DB::raw('now()'),
                     'updated_at' => DB::raw('now()')
                 ]);

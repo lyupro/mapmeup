@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersInGroupsTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,32 +13,23 @@ class CreateUsersInGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_in_groups', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('user_id');
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->integer('user_type_id');
-            $table->foreign('user_type_id')
-                ->references('id')
-                ->on('user_types')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->string('name');
+            $table->string('address');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('type');
 
-            $table->integer('group_id');
-            $table->foreign('group_id')
-                ->references('id')
-                ->on('groups')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->unique(['user_id', 'group_id']);
-
+            $table->softDeletes();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
@@ -54,6 +45,6 @@ class CreateUsersInGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_in_groups');
+        Schema::dropIfExists('locations');
     }
 }

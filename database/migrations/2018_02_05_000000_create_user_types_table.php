@@ -14,7 +14,7 @@ class CreateUserTypesTable extends Migration
     public function up()
     {
         Schema::create('user_types', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->enum('user_type',['User', 'Moderator', 'Admin', 'Developer'])->default('User');
             $table->boolean('global')->default(false);
 
